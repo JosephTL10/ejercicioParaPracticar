@@ -1,0 +1,78 @@
+<!--
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contactanos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/bot">Bot</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+-->
+
+
+<nav id="navbar">Mi Navbar</nav>
+
+  <div class="contenido">
+    <!-- Simula contenido largo para poder hacer scroll -->
+    <h1>Bienvenido</h1>
+    <p>Desliza hacia abajo para ver el efecto.</p>
+    <div style="height: 2000px;"></div>
+  </div>
+
+
+
+
+
+<style>
+    /* Navbar inicial (invisible / transparente) */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  z-index: 1000;
+}
+
+/* Clase que se activa al hacer scroll */
+.navbar-scroll {
+  background-color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+</style>
+
+
+<script>
+    // Cambiar el color de fondo de la barra de navegación al hacer scroll
+    window.addEventListener('scroll', function() { // Escucha el evento de scroll
+        const navbar = document.querySelector('#navbar'); // Selecciona la barra de navegación
+         // Verifica si el scroll es mayor a 50px
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-scroll'); // Añade la clase que cambia el color de fondo
+        } else {
+            navbar.classList.remove('navbar-scroll'); // Elimina la clase si el scroll es menor o igual a 50px
+        }
+    });
+
+</script>

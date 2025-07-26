@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<%- include('partials/head.ejs') %>
+
+<%- include('partials/navigation.ejs') %>
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="PulpitoBot"
+  agent-id="7742ea43-c758-4830-b864-a46de241f2e5"
+  language-code="es"
+></df-messenger>
+</body>
+</html>
