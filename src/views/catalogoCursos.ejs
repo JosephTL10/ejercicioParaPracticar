@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <%- include('partials/head.ejs') %>
+    <%- include('partials/navigation.ejs') %>
+
+    <main class="flex min-h-screen flex-col items-center">
+        <h1 class="text-4xl font-bold text-center my-6">Estas en catalogo de cursos</h1>
+
+        <div class="container mt-4">
+            <p class="text-center">Aquí podrás ver los cursos disponibles.</p>
+            <div id="mostrarCursos" class="row">
+                <!-- Aquí se mostrarán los cursos obtenidos de la API -->
+                <!-- Se utilizará JavaScript para llenar este div con los cursos -->
+            </div>
+        </div>
+
+
+        <script>
+            async function getCursos() {
+                // Esta función se encarga de obtener los cursos desde la API y mostrarlos en la página.
+                try {
+
+                    // response es la respuesta de la API que contiene los cursos, fecth es una función que hace una petición HTTP a la URL especificada.
+                    // En este caso, se está haciendo una petición a la URL 'http://localhost:3000/api/get-cursos' para obtener los cursos disponibles.
+                    // await se utiliza para esperar a que la promesa se resuelva antes de continuar con la ejecución del código.
+                    // Esto es útil para manejar operaciones asíncronas, como las peticiones a una API.
+                    const response = await fetch('http://localhost:3000/api/get-cursos',{
+                        method: 'GET', // Método de la petición HTTP, en este caso es GET para obtener datos.
+                        headers: {
+                        'Content-Type': 'application/json', // Indica que el contenido de la petición es de tipo JSON.
+                        },
+                    }
+                    ); 
+
+                    const cursos = await response.json(); // Convierte la respuesta de la API a formato JSON.
+
+                    // En un <div> con id "mostrarCursos", se crea un elemento <ul> para listar los cursos.
+                    const mostrarCursosDiv = document.getElementById('mostrarCursos'); // Obtiene el elemento del DOM donde se mostrarán los cursos.
+
+
+                    cursos.forEach(curso => {
+                        const cursoDiv = document.createElement('div'); // Crea un nuevo elemento <div> para cada curso.
+                        cursoDiv.classList.add('col-md-4', 'mb-4'); // Añade clases de Bootstrap para el estilo.
+                        cursoDiv.innerHTML = `
+                        <div class="card">
+                            <img src="${curso.url}" class="card-img-top" alt="${curso.titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${curso.titulo}</h5>
+                                <p class="card-text">${curso.descripcion}</p>
+                            </div>
+                        </div>
+                        `;
+
+                        mostrarCursosDiv.appendChild(cursoDiv); // Añade el nuevo <div> al contenedor de cursos.
+
+                    })
+
+                
+                } catch (error) { // Manejo de errores en caso de que la petición falle.
+                    console.error('Error al tener cursos:', error);
+                }
+            }
+
+
+
+            // Llama a la función getCursos para cargar los cursos al cargar la página.
+            getCursos();
+
+        </script>
+    </main> <br><br>
+
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

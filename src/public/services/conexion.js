@@ -37,3 +37,23 @@ export async function Conectar(params) { // Función para conectar a la base de 
     // y se debe importar en el archivo donde se necesite usar la conexión a la base de datos
     // El cliente se puede usar para realizar consultas a la base de datos una vez conectado 
 }
+
+// Función para consultar los cursos en la base de datos
+// Esta función se conecta a la base de datos y realiza una consulta para obtener todos los cursos
+export async function ConsultarCursos(){
+    const cliente = new Client(config)
+    try{
+        await cliente.connect()
+
+        // resultado espera que la consulta a la base de datos se realice correctamente
+        const resultado = await cliente.query("SELECT * FROM cursos"); // Realiza una consulta a la tabla 'cursos', SELECT * FROM cursos significa que se seleccionan todas las columnas de la tabla cursos
+        console.log('Consulta exitosa:', resultado.rows); // Imprime los resultados de la consulta, rows es una propiedad del resultado que contiene las filas devueltas por la consulta
+        return resultado.rows; // Devuelve las filas obtenidas de la consulta
+    }catch (error) {
+        console.error('Error al consultar los cursos:', error); // Imprime un mensaje de error si la consulta falla
+    }
+    finally {
+        await cliente.end(); // Cierra la conexión al cliente de PostgreSQL
+    }
+}
+
