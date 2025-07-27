@@ -6,7 +6,7 @@ import {fileURLToPath} from 'url'; // Importa fileURLToPath de 'url' para conver
 import cors from 'cors'; // Importa cors para manejar solicitudes de diferentes orígenes
 
 
-import router from './routes/index.js'; // Importa las rutas definidas en 'index.js' dentro de la carpeta 'routes'
+import indexRoute from './routes/index.js'; // Importa las rutas definidas en 'index.js' dentro de la carpeta 'routes', no importa que en index.js se exporte el router, porque al importar indexRoute se importa el router
 import {Conectar} from './public/services/conexion.js'; // Importa la función conectar desde 'conexion.js' para establecer conexión a la base de datos
 
 
@@ -20,9 +20,15 @@ app.set('views',join(__dirname, 'views')); // Establece el directorio de vistas 
 
 app.set('view engine', 'ejs'); // Configura el motor de vistas a EJS
 
-app.use(router); // Usa las rutas definidas en 'router'
+const corsOptions = {
+    origin: 'https://ejercicioparapracticar.onrender.com', // Coloca el origen permitido para las solicitudes CORS, esto permite que el servidor acepte solicitudes desde este origen específico
+    optionsSuccessStatus: 200 // Establece el estado de éxito para las solicitudes CORS
+}
 
-app.use(cors()); // Habilita CORS para permitir solicitudes de diferentes orígenes
+
+app.use(cors(corsOptions)); // Habilita CORS para permitir solicitudes de diferentes orígenes
+
+app.use(indexRoute); // Usa las rutas definidas en 'indexRoute'
 
 app.use(express.static(join(__dirname, 'public'))); // Sirve archivos estáticos desde el directorio 'public'
 
