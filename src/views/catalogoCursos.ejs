@@ -28,10 +28,10 @@
                 try {
 
                     // response es la respuesta de la API que contiene los cursos, fecth es una función que hace una petición HTTP a la URL especificada.
-                    // En este caso, se está haciendo una petición a la URL 'http://localhost:3000/api/get-cursos' para obtener los cursos disponibles.
+                    // En este caso, se está haciendo una petición a la URL '/api/get-cursos' para obtener los cursos disponibles.
                     // await se utiliza para esperar a que la promesa se resuelva antes de continuar con la ejecución del código.
                     // Esto es útil para manejar operaciones asíncronas, como las peticiones a una API.
-                    const response = await fetch('http://localhost:3000/api/get-cursos',{
+                    const response = await fetch('/api/get-cursos',{
                         method: 'GET', // Método de la petición HTTP, en este caso es GET para obtener datos.
                         headers: {
                         'Content-Type': 'application/json', // Indica que el contenido de la petición es de tipo JSON.
